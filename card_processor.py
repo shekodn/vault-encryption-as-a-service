@@ -12,31 +12,26 @@ _headers = {
     "Content-Type": "application/json",
 }
 
+
 def get_plaintext(message):
 
-    data = {"ciphertext": message}    
+    data = {"ciphertext": message}
     json_object = json.dumps(data, indent=4)
 
-    response = requests.post(
-        VAULT_URI,
-        headers=_headers,
-        data=json_object,
-    )
+    response = requests.post(VAULT_URI, headers=_headers, data=json_object,)
 
     res = response.json()
-    plaintext = res['data']['plaintext']
+    plaintext = res["data"]["plaintext"]
     plaintext_bytes = base64.b64decode(plaintext)
     return plaintext_bytes.decode("ascii")
 
 
 if __name__ == "__main__":
-    response = requests.get(
-        API_ADDR + CARD_PATH,
-    )
+    response = requests.get(API_ADDR + CARD_PATH,)
 
     cards = response.json()
     for card in cards:
-        card_holder = card['name']
-        encrypted_pan = card['pan']
+        card_holder = card["name"]
+        encrypted_pan = card["pan"]
         pan = get_plaintext(encrypted_pan)
         print(f"Processing {card_holder.upper()} card with number {pan}")
