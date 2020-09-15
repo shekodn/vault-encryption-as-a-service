@@ -1,0 +1,12 @@
+@startuml
+client -> api : POST credit-cards/
+api -> vault : plaintext data
+vault -> api : encrypted data
+api -> client : ok
+
+"card processor" -> api : GET credit-cards/
+api -> "card processor" : ok
+"card processor" -> vault : encrypted data
+vault -> "card processor" : decrypted data
+"card processor" -> "card processor" : Process decrypted data
+@enduml

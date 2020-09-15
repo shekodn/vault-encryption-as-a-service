@@ -1,5 +1,11 @@
 # Encryption as a Service in Action
 
+### TL;DR
+Encryption as a Service PoC using Python and Vault.
+
+## Overview
+![overview](./docs/diagram.png)
+
 ## How to Run
 Just do `docker-compose up --build` and you should be ready to go.
 
@@ -12,7 +18,7 @@ Run the following script:
 
 1. The transit Secrets Engine was enabled. This tells vault to **not** save data and turn on the __encryption as a service__ functionality.
 2. The root token was created. This one is used by our apps to encrypt and decrypt.
-3. Generate a symmetric key (aes256-gcm96). This one is used to encrypt and decrypt the respective data.
+3. A symmetric key was generated. This one is used to encrypt and decrypt the respective data.
 
 Grab the `token` from the output value and put it as `VAULT_TOKEN` env var in:
 - `app/settings.py`
@@ -86,4 +92,4 @@ Processing ANÍBAL TROILO card with number 2720997130887021
 ```
 
 
-Voilà. Encryption keys and rotation was handled by Vault.
+Voilà. Encryption keys and rotation were handled by Vault.
